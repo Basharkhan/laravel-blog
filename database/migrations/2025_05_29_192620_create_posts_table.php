@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 2048);
-            $table->string('slug', 2048)->unique();
-            $table->string('thumbnail', 2048)->nullable();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('thumbnail')->nullable();
             $table->longText('body');
             $table->boolean('active');
-            $table->datetimes('published_at');
+            $table->datetime('published_at');
             $table->foreignIdFor(User::class, 'user_id');
             $table->timestamps();
         });
