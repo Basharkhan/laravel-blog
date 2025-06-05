@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 class Post extends Model {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'slug',
@@ -36,5 +39,13 @@ class Post extends Model {
 
     public function formattedDate() {
         return $this->published_at->format('F j, Y');
+    }
+
+    public function getThumbnail() {
+        if(str_starts_with($this->thumbnail, 'http')) {
+            return $this->thumbnail;
+        }
+
+        return '/storage/' . $this->thumbnail;
     }
 }
