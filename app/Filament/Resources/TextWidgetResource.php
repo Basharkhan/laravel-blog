@@ -27,6 +27,8 @@ class TextWidgetResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('key')
                     ->required()
+                    ->unique(TextWidget::class, 'key', ignoreRecord: true)
+                    ->label('Key')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('title')
                 ->required()

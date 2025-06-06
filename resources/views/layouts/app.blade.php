@@ -58,10 +58,10 @@
     <header class="w-full container mx-auto">
         <div class="flex flex-col items-center py-12">
             <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
-                Look Around
+                {{ \App\Models\TextWidget::getTitle('header-widget') }}
             </a>
             <p class="text-lg text-gray-600">
-                There are many things in heaven and earth!
+                {{ \App\Models\TextWidget::getContent('header-widget') }}
             </p>
         </div>
     </header>
