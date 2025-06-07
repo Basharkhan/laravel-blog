@@ -45,11 +45,27 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        if(!$post->active && $post->published_at > Carbon::now()) {
+        if(!$post->active || $post->published_at > Carbon::now()) {
             throw new NotFoundHttpException();
         }
 
-        return view('post.view', compact('post'));
+        $prev = Post::query()
+                    ->where('active', true)
+                    ->whereDate('published_at', '<', Carbon::now())
+                    ->whereDate('published_at', '>', $post->published_at)
+                    ->orderBy('published_at', 'asc')
+                    ->limit(1)
+                    ->first();
+
+        $next = Post::query()
+                    ->where('active', true)
+                    ->whereDate('published_at', '<', Carbon::now())
+                    ->whereDate('published_at', '<', $post->published_at)
+                    ->orderBy('published_at', 'desc')
+                    ->limit(1)
+                    ->first();        
+
+        return view('post.view', compact('post', 'prev', 'next'));
     }
 
     /**
