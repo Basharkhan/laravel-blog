@@ -2,8 +2,10 @@
 
 namespace App\View\Components;
 
+use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class AppLayout extends Component
@@ -21,6 +23,12 @@ class AppLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.app');
+        $categories = Category::withCount('posts')
+            ->having('posts_count', '>', 0)
+            ->orderByDesc('posts_count')
+            ->take(5)
+            ->get();
+            
+        return view('layouts.app', compact('categories'));
     }
 }

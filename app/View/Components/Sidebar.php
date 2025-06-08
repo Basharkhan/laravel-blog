@@ -2,8 +2,10 @@
 
 namespace App\View\Components;
 
+use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
@@ -21,6 +23,11 @@ class Sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sidebar');
+        $categories = Category::withCount('posts')
+            ->having('posts_count', '>', 0)
+            ->orderByDesc('posts_count')
+            ->get();
+
+        return view('components.sidebar', compact('categories'));
     }
 }
