@@ -6,7 +6,7 @@
         @foreach($categories as $category)
             <a href="{{ route('by-category', $category) }}" 
                 class="text-semibold px-2 py-3 rounded 
-                {{ request('category')->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}"
+                {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}"
             >
                 {{$category->title}} ({{$category->posts_count}})
             </a>
