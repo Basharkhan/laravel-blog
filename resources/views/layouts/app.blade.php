@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khan Baba</title>
-    <meta name="author" content="David Grzyb">
-    <meta name="description" content="">
+    <title>{{ $metaTitle ?: "Look Around" }}</title>
+    <meta name="author" content="Look Around">
+    <meta name="description" content="{{ $metaDescription }}">
 
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">

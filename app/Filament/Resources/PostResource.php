@@ -49,6 +49,10 @@ class PostResource extends Resource
                         ->columnSpanFull(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
+                    Forms\Components\TextInput::make('meta_title')
+                        ->nullable(),
+                    Forms\Components\TextInput::make('meta_description')
+                        ->nullable(),
                     Forms\Components\DateTimePicker::make('published_at')
                         ->required(),                    
                     ])->columnSpan(8),
